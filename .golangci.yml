@@ -1,0 +1,7 @@
+output:
+  sort-results: true
+linters:
+  enable:
+    - gosec
+    - nilnil
+    - nilerr
