@@ -1,0 +1,39 @@
+name: Build/Deploy on Push
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    branches:
+      - master
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.base_ref }}
+  cancel-in-progress: true
+
+jobs:
+  run:
+    name: Build/Deploy on Push
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - run: go get .
+
+      - uses: golangci/golangci-lint-action@v5
+        with:
+          version: latest
+
+      - run: go test
+      - run: go build -o ./dist/main .
+
+      - uses: goreleaser/goreleaser-action@v5
+        with:
+          distribution: goreleaser
+          version: latest
+          args: release --clean
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
