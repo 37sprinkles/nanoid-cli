@@ -10,20 +10,16 @@ import (
 	"github.com/jaevor/go-nanoid"
 )
 
-func parseFlags() (string, int, int) {
-	printUsage := func() {
-		fmt.Println("Usage: nanoid charset length [count]")
-		fmt.Println("  charset (string): required, \"hex\", \"alpha\", \"numeric\", \"base64\", \"base90\" or a string of characters")
-		fmt.Println("  length (byte): required, must be between 2 and 255")
-		fmt.Println("  count (int32): optional, must be at least 1")
-		flag.PrintDefaults()
-		os.Exit(0)
-	}
+func printUsage() {
+	fmt.Println("Usage: nanoid charset length [count]")
+	fmt.Println("  charset (string): required, \"hex\", \"alpha\", \"numeric\", \"base64\", \"base90\" or a string of characters")
+	fmt.Println("  length (byte): required, must be between 2 and 255")
+	fmt.Println("  count (int32): optional, must be at least 1")
+}
 
-	flag.Parse()
-
+func parseFlags() (string, int, int, bool) {
 	if len(flag.Args()) < 2 || len(flag.Args()) > 3 {
-		printUsage()
+		return "", 0, 0, false
 	}
 
 	charset := strings.ToLower(flag.Arg(0))
@@ -38,11 +34,11 @@ func parseFlags() (string, int, int) {
 
 	length, err := strconv.Atoi(flag.Arg(1))
 	if err != nil {
-		printUsage()
+		return "", 0, 0, false
 	}
 
 	if length <= 1 || length > 255 {
-		printUsage()
+		return "", 0, 0, false
 	}
 
 	count := 1
@@ -50,19 +46,31 @@ func parseFlags() (string, int, int) {
 		count, err = strconv.Atoi(flag.Arg(2))
 
 		if err != nil {
-			printUsage()
+			return "", 0, 0, false
 		}
 	}
 
 	if count <= 0 {
-		printUsage()
+		return "", 0, 0, false
 	}
 
-	return charset, length, count
+	return charset, length, count, true
 }
 
 func main() {
-	charset, length, count := parseFlags()
+	flag.Parse()
+
+	if len(flag.Args()) == 0 {
+		printUsage()
+		os.Exit(0)
+	}
+
+	charset, length, count, ok := parseFlags()
+
+	if !ok {
+		printUsage()
+		os.Exit(1)
+	}
 
 	var generator func() string
 	var err error
