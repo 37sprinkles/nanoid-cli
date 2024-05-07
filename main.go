@@ -22,8 +22,8 @@ func parseFlags() (string, int, int, bool) {
 		return "", 0, 0, false
 	}
 
-	charset := strings.ToLower(flag.Arg(0))
-	switch charset {
+	charset := flag.Arg(0)
+	switch strings.ToLower(charset) {
 	case "hex":
 		charset = "0123456789ABCDEF"
 	case "alpha":
