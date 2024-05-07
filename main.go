@@ -30,6 +30,8 @@ func parseFlags() (string, int, int, bool) {
 		charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 	case "numeric":
 		charset = "0123456789"
+	case "base90": // Remove when the bug is fixed https://github.com/jaevor/go-nanoid/issues/9
+		charset = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_!#$%&()*+,.:;<=>?@[]^`{|}~"
 	}
 
 	length, err := strconv.Atoi(flag.Arg(1))
