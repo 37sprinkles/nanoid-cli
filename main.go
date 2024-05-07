@@ -11,15 +11,29 @@ import (
 )
 
 func printUsage() {
-	fmt.Println("Usage: nanoid <charset> <length> [count]")
+	fmt.Println("Usage: nanoid <count> -- generates canonic ids")
+	fmt.Println("       nanoid <charset> <length> [count] -- generates ids with a specific charset and length")
 	fmt.Println("  charset (string): required, \"hex\", \"alpha\", \"numeric\", \"base64\", \"base90\" or a string of characters")
 	fmt.Println("  length (byte): required, must be between 2 and 255")
 	fmt.Println("  count (int32): optional, must be at least 1")
 }
 
 func parseFlags() (string, int, int, bool) {
-	if len(flag.Args()) < 2 || len(flag.Args()) > 3 {
+	if len(flag.Args()) > 3 {
 		return "", 0, 0, false
+	}
+
+	if len(flag.Args()) == 0 {
+		return "base64", 21, 1, true
+	}
+
+	if len(flag.Args()) == 1 {
+		length, err := strconv.Atoi(flag.Arg(0))
+		if err != nil {
+			return "", 0, 0, false
+		}
+
+		return "base64", 21, length, true
 	}
 
 	charset := flag.Arg(0)
@@ -61,11 +75,6 @@ func parseFlags() (string, int, int, bool) {
 
 func main() {
 	flag.Parse()
-
-	if len(flag.Args()) == 0 {
-		printUsage()
-		os.Exit(0)
-	}
 
 	charset, length, count, ok := parseFlags()
 

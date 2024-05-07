@@ -17,17 +17,32 @@ func TestParseFlags(t *testing.T) {
 		}
 	}{
 		{
-			name: "preset charset",
-			args: []string{"HEX", "10"},
+			name: "no args",
+			args: []string{},
 			expected: struct {
 				charset string
 				length  int
 				count   int
 				ok      bool
 			}{
-				charset: "0123456789ABCDEF",
-				length:  10,
+				charset: "base64",
+				length:  21,
 				count:   1,
+				ok:      true,
+			},
+		},
+		{
+			name: "canonic with count",
+			args: []string{"10"},
+			expected: struct {
+				charset string
+				length  int
+				count   int
+				ok      bool
+			}{
+				charset: "base64",
+				length:  21,
+				count:   10,
 				ok:      true,
 			},
 		},
@@ -124,6 +139,21 @@ func TestParseFlags(t *testing.T) {
 		{
 			name: "out of bounds count",
 			args: []string{"hex", "10", "-1"},
+			expected: struct {
+				charset string
+				length  int
+				count   int
+				ok      bool
+			}{
+				charset: "",
+				length:  0,
+				count:   0,
+				ok:      false,
+			},
+		},
+		{
+			name: "too many args",
+			args: []string{"hex", "10", "10", "foo"},
 			expected: struct {
 				charset string
 				length  int
