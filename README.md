@@ -13,7 +13,7 @@ go install github.com/37sprinkles/nanoid-cli@latest
 ### Usage
 
 ```sh
-Usage: nanoid charset length [count]
+Usage: nanoid <charset> <length> [count]
   charset (string): required, "hex", "alpha", "numeric", "base64", "base90" or a string of characters
   length (byte): required, must be between 2 and 255
   count (int32): optional, must be at least 1

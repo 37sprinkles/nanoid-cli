@@ -11,7 +11,7 @@ import (
 )
 
 func printUsage() {
-	fmt.Println("Usage: nanoid charset length [count]")
+	fmt.Println("Usage: nanoid <charset> <length> [count]")
 	fmt.Println("  charset (string): required, \"hex\", \"alpha\", \"numeric\", \"base64\", \"base90\" or a string of characters")
 	fmt.Println("  length (byte): required, must be between 2 and 255")
 	fmt.Println("  count (int32): optional, must be at least 1")
