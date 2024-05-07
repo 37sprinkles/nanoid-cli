@@ -7,7 +7,7 @@ A tiny cli wrapper around [go-nanoid](https://github.com/jaevor/go-nanoid) to ge
 With go 1.22 or higher:
 
 ```sh
-go install github.com/37spinkles/nanoid-cli@latest
+go install github.com/37sprinkles/nanoid-cli@latest
 ```
 
 ### Usage
