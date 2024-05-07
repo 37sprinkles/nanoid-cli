@@ -1,16 +1,16 @@
-# nanoid-cli
+# nanoid cli
 
 A tiny cli wrapper around [go-nanoid](https://github.com/jaevor/go-nanoid) to generate unique ids from the command line.
 
-### Install
+## Install
 
 With go 1.22 or higher:
 
 ```sh
-go install github.com/37sprinkles/nanoid-cli@latest
+go install github.com/37sprinkles/nanoid-cli/nanoid@latest
 ```
 
-### Usage
+## Usage
 
 ```sh
 Usage: nanoid <count> -- generates canonic ids
@@ -20,7 +20,7 @@ Usage: nanoid <count> -- generates canonic ids
   count (int32): optional, must be at least 1
 ```
 
-### Examples
+## Examples
 
 ```sh
 $ nanoid 

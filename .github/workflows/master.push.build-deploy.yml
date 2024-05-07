@@ -22,14 +22,13 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version: stable
-      - run: go get .
+      - run: go get ./nanoid
 
       - uses: golangci/golangci-lint-action@v5
         with:
           version: latest
 
-      - run: go test
-      - run: go build -o ./dist/main .
+      - run: go test ./...
 
       - uses: go-semantic-release/action@v1
         with:

@@ -1,5 +1,6 @@
 builds:
-  - binary: nanoid
+  - main: ./nanoid
+    binary: nanoid
     goos:
       - linux
       - windows
