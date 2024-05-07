@@ -2,6 +2,14 @@
 
 A tiny cli wrapper around [go-nanoid](https://github.com/jaevor/go-nanoid) to generate unique ids from the command line.
 
+### Install
+
+With go 1.22 or higher:
+
+```sh
+go install github.com/37spinkles/nanoid-cli@latest
+```
+
 ### Usage
 
 ```sh
