@@ -14,6 +14,7 @@ concurrency:
 
 jobs:
   run:
+    permissions: write-all
     name: Build/Deploy on Push
     runs-on: ubuntu-latest
     steps:
@@ -30,10 +31,8 @@ jobs:
       - run: go test
       - run: go build -o ./dist/main .
 
-      - uses: goreleaser/goreleaser-action@v5
+      - uses: go-semantic-release/action@v1
         with:
-          distribution: goreleaser
-          version: latest
-          args: release --clean
+          hooks: goreleaser
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,4 +1,4 @@
-module github.com/37sprinkles/nanoid
+module github.com/37sprinkles/nanoid-cli
 
 go 1.22.2
 
