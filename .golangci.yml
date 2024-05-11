@@ -2,6 +2,8 @@ output:
   sort-results: true
 linters:
   enable:
+    - gocognit
     - gosec
     - nilnil
     - nilerr
+    - protogetter
