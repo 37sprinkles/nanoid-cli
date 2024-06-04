@@ -11,7 +11,7 @@ import (
 )
 
 func printUsage() {
-	fmt.Println("Usage: nanoid <count> -- generates canonic ids")
+	fmt.Println("Usage: nanoid [count] -- generates canonic ids")
 	fmt.Println("       nanoid <charset> <length> [count] -- generates ids with a specific charset and length")
 	fmt.Println("  charset (string): required, \"hex\", \"alpha\", \"numeric\", \"base64\", \"base90\" or a string of characters")
 	fmt.Println("  length (byte): required, must be between 2 and 255")
